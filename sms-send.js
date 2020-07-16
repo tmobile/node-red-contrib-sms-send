@@ -3,29 +3,26 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         var node = this;
         node.on('input', function(msg) {
-            var arr = msg.payload[0].split(",");
-            var number = Number(arr[0]);
+            var arr = msg.payload.toString().split(",");
+            console.log('ARR:'+arr);
+            var number = arr[0];
+            console.log('NUMBER:'+number);
             var message = arr[1];
-            var SerialPort = require("serialport").SerialPort;
+            console.log('MESSAGE:'+message);
+            var SerialPort = require("serialport");
             var serialPort = new SerialPort("/dev/ttyUSB3", {
-                baudrate: 115200
+                baudRate: 115200
             });
             serialPort.on("open", function() {
                 console.log('open');
-                setTimeout(function(){ console.log("sleep(3)"); }, 3000);
-                serialPort.write(new Buffer("AT+CMGF=1\r", 'ascii'), function(err, results) {
-                    console.log('err ' + err);
-                    console.log('results ' + results);
-                });
-                setTimeout(function(){ console.log("sleep(3)"); }, 3000);
-                serialPort.write(new Buffer("AT+CMGS=\""+number+"\"\r", 'ascii'), function(err, results) {
-                    console.log('err ' + err);
-                    console.log('results ' + results);
-                });
-                setTimeout(function(){ console.log("sleep(3)"); }, 3000);
-                serialPort.write(new Buffer(message + "\r\n" + chr(26), 'ascii'), function(err, results) {
-                    console.log('err ' + err);
-                    console.log('results ' + results);
+                serialPort.write(new Buffer("AT+CMGF=1\r", 'utf8'), function(err, results) {
+                    serialPort.write(new Buffer("AT+CMGS=\""+number+"\"\r", 'utf8'), function(err, results) {
+                        serialPort.write(new Buffer(message + "\r\n" + String.fromCharCode(26), 'utf8'), function(err, results) {
+                            serialPort.close(function (err){
+                                console.log('port closed', err);
+                            });
+                        });
+                    });
                 });
             });
             node.send(msg);
