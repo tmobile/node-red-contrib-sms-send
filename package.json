@@ -20,5 +20,11 @@
       "sms-send": "sms-send.js"
     }
   },
+  "dependencies": {
+    "raspi": "6.0.1",
+    "raspi-serial": "6.0.0",
+    "serialport": "9.0.0",
+    "@serialport/stream":"9.0.0"
+  },
   "homepage": "https://github.com/tmobile/node-red-contrib-sms-send#readme"
 }
