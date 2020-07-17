@@ -15,9 +15,9 @@ module.exports = function(RED) {
             });
             serialPort.on("open", function() {
                 console.log('open');
-                serialPort.write(new Buffer("AT+CMGF=1\r", 'utf8'), function(err, results) {
-                    serialPort.write(new Buffer("AT+CMGS=\""+number+"\"\r", 'utf8'), function(err, results) {
-                        serialPort.write(new Buffer(message + "\r\n" + String.fromCharCode(26), 'utf8'), function(err, results) {
+                serialPort.write(new Buffer.from("AT+CMGF=1\r", 'utf8'), function(err, results) {
+                    serialPort.write(new Buffer.from("AT+CMGS=\""+number+"\"\r", 'utf8'), function(err, results) {
+                        serialPort.write(new Buffer.from(message + "\r\n" + String.fromCharCode(26), 'utf8'), function(err, results) {
                             serialPort.close(function (err){
                                 console.log('port closed', err);
                             });
