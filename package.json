@@ -4,14 +4,14 @@
   "description": "Send SMS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tmobile/node-red-contrib-sms-send.git"
   },
   "author": "Eric Hill",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/tmobile/node-red-contrib-sms-send/issues"
   },
@@ -21,10 +21,13 @@
     }
   },
   "dependencies": {
-    "raspi": "6.0.1",
-    "raspi-serial": "6.0.0",
     "serialport": "9.0.0",
-    "@serialport/stream":"9.0.0"
+    "@serialport/stream": "9.0.0"
   },
-  "homepage": "https://github.com/tmobile/node-red-contrib-sms-send#readme"
+  "homepage": "https://github.com/tmobile/node-red-contrib-sms-send#readme",
+  "devDependencies": {},
+  "keywords": [
+    "sms",
+    "node-red"
+  ]
 }
