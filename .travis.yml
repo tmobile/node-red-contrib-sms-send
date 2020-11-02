@@ -11,7 +11,7 @@ jobs:
   - stage: build
     script: npm run test
     on:
-      branch: master
+      branch: main
   - stage: pr-build
     if: "(type IN (pull_request))"
     script: npm run test
